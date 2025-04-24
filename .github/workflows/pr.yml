@@ -1,0 +1,14 @@
+name: Lint PR Title
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  check-title:
+    runs-on: self-hosted
+    steps:
+      - name: Output PR Title
+        run: |
+          title="${{ github.event.pull_request.title }}"
+          echo "Running check on title: $title"
