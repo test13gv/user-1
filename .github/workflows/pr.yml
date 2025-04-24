@@ -11,4 +11,4 @@ jobs:
       - name: Output PR Title
         run: |
           title="${{ github.event.pull_request.title }}"
-          echo "Running check on title: $title"
+          echo $title
