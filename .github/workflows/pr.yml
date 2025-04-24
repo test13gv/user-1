@@ -5,10 +5,17 @@ on:
     types: [opened, reopened]
 
 jobs:
-  check-title:
+  lint_pr_title:
     runs-on: self-hosted
     steps:
-      - name: Output PR Title
+      - name: Check PR Title
         run: |
           title="${{ github.event.pull_request.title }}"
           echo $title
+          if [[ $title =~ ^(chore|fix|feat) ]]; then
+            echo "PR title starts with 'chore', 'fix', or 'feat'"
+            exit 0
+          else
+            echo "PR title did not start with 'chore', 'fix', or 'feat'"
+            exit 1
+          fi
